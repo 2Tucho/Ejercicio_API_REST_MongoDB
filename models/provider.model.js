@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 require('../config/db_mongo') // Conexión a BBDD MongoDB
 
 const objectSchema = {
-    
     company_name: { 
         type: String, 
         required: true,
@@ -30,7 +29,7 @@ const providerSchema = mongoose.Schema(objectSchema);
 const Provider = mongoose.model('Provider', providerSchema);
 
 
-Provider.find({}).then((data) => console.log(data))
+//Provider.find({}).then((data) => console.log(data))
 
 /* Provider.create({
     "company_name": "Teatro Marquina",
