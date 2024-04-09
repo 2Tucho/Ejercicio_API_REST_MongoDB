@@ -4,13 +4,11 @@ require('../config/db_mongo') // Conexión a BBDD MongoDB
 const objectSchema = {
     company_name: { 
         type: String, 
-        required: true,
-        unique: true 
+        required: true
     },
     CIF: { 
         type: String, 
-        required: true,
-        unique: true
+        required: true
     },
     address: { 
         type: String, 

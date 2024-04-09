@@ -7,13 +7,13 @@ const createProvider = async (req, res) => {
     try{
         const data = req.body;
         let answer = await new Provider(data).save();
-        res.status(201).json({"message": `proveedor actualizado: ${req.body.company_name}`, "provider":{answer}});
+        res.status(201).json({message: `proveedor actualizado: ${req.body.company_name}`, "provider":{answer}});
 
     }catch (error) {
         console.log(`ERROR: ${error.stack}`);
         res.status(400).json({msj:`ERROR: ${error.stack}`});
     }
-}
+};
 
 // READ
 const getAllProviders = async (req, res) => {
@@ -25,11 +25,42 @@ const getAllProviders = async (req, res) => {
         console.log(`ERROR: ${error.stack}`);
         res.status(400).json({msj:`ERROR: ${error.stack}`});
     }
+};
+
+// UPDATE
+const updateProvider = async (req, res) => {
+    try {
+        const company = req.params.CIF;
+        const newData = req.body;
+        await Provider.updateOne({CIF:company}, newData)
+        res.status(200).json(Provider);
+    } 
+    catch (error) {
+        console.log(`ERROR: ${error.stack}`);
+        res.status(400).json({ msj: `ERROR: ${error.stack}` });
+    }
 }
+
+// DELETE
+const deleteProvider = async (req, res) => {
+    try {
+        const company_CIF = req.body.CIF;
+
+        const deletion = await Provider.deleteOne({CIF:company_CIF});
+        console.log(deletion)
+        console.log(company_CIF)
+        res.status(200).send("Producto borrado!. Has borrado:"+company_CIF);
+    } catch (error) {
+        console.log(`ERROR: ${error.stack}`);
+        res.status(400).json({ msj: `ERROR: ${error.stack}` });
+    }
+
+}
+
 
 module.exports = {
     createProvider,
-    getAllProviders
-    //editProvider,
-    //deleteProvider
+    getAllProviders,
+    updateProvider,
+    deleteProvider
 }
