@@ -2,36 +2,22 @@ const mongoose = require('mongoose');
 require('../config/db_mongo') // Conexión a BBDD MongoDB
 
 const objectSchema = {
-    id: { 
+    /* id: { 
         type: Number, 
         required: true,
-        unique: true
-    },
+    }, */
     title: { 
-        type: String, 
-        required: true,
-        unique: true 
+        type: String
     },
     price: { 
-        type: Number, 
-        required: true 
+        type: Number
     },
     description: { 
-        type: String, 
-        required: true 
+        type: String
     },
-    image:{
-        type: String,
-        validate: {
-            validator: function(url){
-                if(url.indexOf('.jpg') != -1 || url.indexOf('.png') != -1)
-                    return true;
-                else {
-                    return false;
-                }
-            }, 
-            message: "Porfa, sólo imágenes JPG o PNG"
-        }
+    provider:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Provider'
     }
 };
 // Crear el esquema
