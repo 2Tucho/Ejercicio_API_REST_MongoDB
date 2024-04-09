@@ -30,10 +30,10 @@ const getAllProviders = async (req, res) => {
 // UPDATE
 const updateProvider = async (req, res) => {
     try {
-        const company = req.params.CIF;
+        const company = req.body.CIF;
         const newData = req.body;
         await Provider.updateOne({CIF:company}, newData)
-        res.status(200).json(Provider);
+        res.status(200).json({message: `proveedor actualizado: ${company}`, provider:{newData}});
     } 
     catch (error) {
         console.log(`ERROR: ${error.stack}`);
